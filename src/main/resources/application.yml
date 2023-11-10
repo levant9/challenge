@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/challenge
+    password: admin321!
+    username: admin
+    driver-class: org.postgresql.Driver
