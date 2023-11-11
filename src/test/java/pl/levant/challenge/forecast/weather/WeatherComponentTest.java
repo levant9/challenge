@@ -29,7 +29,7 @@ class WeatherComponentTest {
 
     @Test
     void givenLoadedForecast_whenGetForecastsForStavanger_thenReturnForecastForLast7Days() {
-        var forecasts = weatherComponent.getForecast(7, Location.Stavanger);
+        var forecasts = weatherComponent.getForecasts(7, Location.Stavanger);
         assertThat(forecasts).isNotEmpty();
     }
 

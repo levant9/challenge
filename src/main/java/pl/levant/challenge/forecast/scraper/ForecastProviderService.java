@@ -11,6 +11,6 @@ class ForecastProviderService {
 
     public ForecastFeed retrieveForecasts(double longitude, double latitude) {
         var forecastOutput = sevenTimerClient.readForecastForEightDays(longitude, latitude);
-        return null;
+        return ForecastOutputConverter.convert(longitude, latitude, forecastOutput);
     }
 }

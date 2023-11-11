@@ -14,6 +14,12 @@ spring:
     password: admin321!
     username: admin
     driver-class: org.postgresql.Driver
+logging:
+  level:
+    pl.levant.challenge: DEBUG
 domain:
   forecast:
     feeding-rate: 60000
+  seven-timer:
+    client:
+      base-url: http://www.7timer.info/bin/api.pl
