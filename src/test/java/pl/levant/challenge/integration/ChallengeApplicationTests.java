@@ -1,4 +1,4 @@
-package pl.levant.challenge;
+package pl.levant.challenge.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

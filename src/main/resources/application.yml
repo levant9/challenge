@@ -1,6 +1,19 @@
 spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://localhost:5432/challenge
     password: admin321!
     username: admin
     driver-class: org.postgresql.Driver
+domain:
+  forecast:
+    feeding-rate: 60000

@@ -15,5 +15,6 @@ Stavanger, Norway
 Latitude and longitude coordinates are: 58.969975, 5.733107.
 
 
-## How to run
-Spin PostreSQL database from docker-compose.yml file before starting SpringBoot application.
+## How to run locally
+Spin PostgreSQL database from docker-compose.yml file (create and start container) before starting SpringBoot application
+(e.g. by `./gradlew bootRun`)
