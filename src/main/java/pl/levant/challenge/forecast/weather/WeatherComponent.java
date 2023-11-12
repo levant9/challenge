@@ -1,5 +1,6 @@
 package pl.levant.challenge.forecast.weather;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,6 +26,7 @@ public class WeatherComponent {
     }
 
     @Scheduled(fixedDelayString = "${domain.forecast.feeding-rate}")
+    @Transactional
     public void feedForecast() {
         log.info("Feeding weather forecasts triggered for Stavanger...");
         var stavangerLocation = Location.Stavanger;

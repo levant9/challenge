@@ -27,7 +27,7 @@ public class SevenTimerRestClient implements SevenTimerClient {
 
     @Override
     public ForecastOutput readForecastForEightDays(double longitude, double latitude) {
-        log.info("Getting forecast from 7Time for long {} and lat {}", longitude, latitude);
+        log.info("Getting forecast from 7Time for long: '{}' and lat: '{}'", longitude, latitude);
         var response = webClient.get()
                 .uri(uriBuilder -> uriBuilder.queryParam("lon", longitude)
                         .queryParam("lat", latitude)
@@ -37,9 +37,9 @@ public class SevenTimerRestClient implements SevenTimerClient {
                 )
                 .retrieve()
                 .bodyToMono(String.class)
-                .retryWhen(Retry.backoff(3, Duration.ofSeconds(5)))
+                .retryWhen(Retry.backoff(3, Duration.ofSeconds(1)))
                 .block();
-        log.debug("Response {}", response);
+        log.debug("Response: {}", response);
         try {
             return objectMapper.readValue(response, ForecastOutput.class);
         } catch (JsonProcessingException e) {

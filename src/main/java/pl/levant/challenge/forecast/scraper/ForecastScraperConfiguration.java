@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.zalando.logbook.Logbook;
+import org.zalando.logbook.spring.webflux.LogbookExchangeFilterFunction;
 import pl.levant.challenge.forecast.scraper.client.SevenTimerRestClient;
 import reactor.netty.http.client.HttpClient;
 
@@ -18,16 +20,23 @@ public class ForecastScraperConfiguration {
     private String sevenTimerBaseUrl;
 
     @Bean
-    public WebClient.Builder webClientBuilder() {
+    public WebClient.Builder webClientBuilder(Logbook logbook) {
         var httpClient = HttpClient.create()
-                .responseTimeout(Duration.ofSeconds(30));
+                .responseTimeout(Duration.ofSeconds(30))
+                .followRedirect(true);
         return WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(httpClient));
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .filter(new LogbookExchangeFilterFunction(logbook));
     }
 
     @Bean
     public ForecastScraperComponent forecastScraperComponent(WebClient.Builder webClientBuilder, ObjectMapper objectMapper) {
         return new ForecastScraperComponent(
                 new ForecastProviderService(new SevenTimerRestClient(webClientBuilder, sevenTimerBaseUrl, objectMapper)));
+    }
+
+    @Bean
+    public Logbook logbook() {
+        return Logbook.create();
     }
 }

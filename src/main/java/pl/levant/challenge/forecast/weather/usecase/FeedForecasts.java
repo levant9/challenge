@@ -7,8 +7,6 @@ import pl.levant.challenge.forecast.weather.persistance.ForecastId;
 import pl.levant.challenge.forecast.weather.persistance.ForecastRecord;
 import pl.levant.challenge.forecast.weather.persistance.WeatherRepository;
 
-import java.time.LocalDate;
-
 @RequiredArgsConstructor
 @Slf4j
 public class FeedForecasts {
@@ -21,7 +19,7 @@ public class FeedForecasts {
         }
         var forecastRecords = forecastsFeed.forecasts().stream()
                 .map(forecast -> new ForecastRecord(
-                        new ForecastId(LocalDate.now(), forecastsFeed.latitude(), forecastsFeed.longitude()), //FIXME
+                        new ForecastId(forecast.date(), forecastsFeed.latitude(), forecastsFeed.longitude()),
                         forecast.minTemperature(),
                         forecast.maxTemperature(),
                         forecast.windSpeed(),

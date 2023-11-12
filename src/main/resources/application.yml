@@ -17,6 +17,7 @@ spring:
 logging:
   level:
     pl.levant.challenge: DEBUG
+    org.zalando.logbook: TRACE
 domain:
   forecast:
     feeding-rate: 60000
