@@ -1,10 +1,21 @@
 spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
   datasource:
     url: jdbc:tc:postgresql:///dbname
     username: test
     password: test
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+logging:
+  level:
+    pl.levant.challenge: DEBUG
+    com.github.tomakehurst.wiremock: TRACE
+domain:
+  seven-timer:
+    client:
+      base-url: "http://localhost:8099"
+  forecast:
+    feeding-rate: "100000000"
+    feeding-delay: "10000000"

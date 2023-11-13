@@ -37,6 +37,7 @@ public class SevenTimerRestClient implements SevenTimerClient {
                 )
                 .retrieve()
                 .bodyToMono(String.class)
+                .doOnError(throwable -> log.warn("Exception during calling 7Timer", throwable))
                 .retryWhen(Retry.backoff(3, Duration.ofSeconds(1)))
                 .block();
         log.debug("Response: {}", response);

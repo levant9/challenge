@@ -3,7 +3,6 @@ package pl.levant.challenge.forecast.scraper.client;
 import java.util.List;
 
 public record ForecastOutput(
-        String product,
         String init,
         List<DataSeries> dataseries
 ) {

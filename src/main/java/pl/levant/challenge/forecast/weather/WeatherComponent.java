@@ -25,7 +25,7 @@ public class WeatherComponent {
         return getForecastsUseCase.get(days, location);
     }
 
-    @Scheduled(fixedDelayString = "${domain.forecast.feeding-rate}")
+    @Scheduled(fixedDelayString = "${domain.forecast.feeding-rate}", initialDelayString = "${domain.forecast.feeding-delay}")
     @Transactional
     public void feedForecast() {
         log.info("Feeding weather forecasts triggered for Stavanger...");
@@ -33,5 +33,6 @@ public class WeatherComponent {
         var forecastsFeed = forecastScraperComponent.retrieveForecasts(stavangerLocation.getLongitude(), stavangerLocation.getLatitude());
         log.debug("Retrieved forecasts, feeding...");
         feedForecastsUseCase.feed(forecastsFeed);
+        log.info("Feed completed, loaded forecasts for {} days", forecastsFeed.forecasts().size());
     }
 }
